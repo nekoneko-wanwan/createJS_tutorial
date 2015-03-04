@@ -15,7 +15,7 @@ function initialize() {
     loader.loadFile({src: file, data: myBitmap});
     loader.addEventListener("fileload", draw);
 
-    myBitmap.addEventListener("click", rotate);
+    myBitmap.addEventListener("mousedown", startRotation);
     setAppearance(myBitmap, cWidth / 2, cHeight / 2);
 }
 
@@ -37,37 +37,41 @@ function draw(e) {
     stage.update();
 }
 
-// インスタンスを回してからクリックした座標に合わせる場合
-function _rotate(e) {
-    var instance   = e.target;
-    var mouseX     = e.stageX;
-    var mouseY     = e.stageY;
-    var mousePoint = instance.globalToLocal(mouseX, mouseY);
-    var offset;
-
-    instance.rotation += angle;  // 順番に注意
-
-    offset      = instance.localToGlobal(mousePoint.x, mousePoint.y);
-    instance.x += mouseX - offset.x;
-    instance.y += mouseY - offset.y;
-
-    stage.update();
-}
-
-// クリック座標を基準点にして回したら位置合わせ
-function rotate(e) {
-    var instance   = e.target;
-    var mouseX     = e.stageX;
-    var mouseY     = e.stageY;
+function startRotation(e) {
+    var instance = e.target;
+    var mouseX   = e.stageX;
+    var mouseY   = e.stageY;
     var mousePoint = instance.globalToLocal(mouseX, mouseY);
 
     instance.regX = mousePoint.x;
     instance.regY = mousePoint.y;
 
-    instance.rotation += angle;
+    instance.addEventListener('pressmove', rotate);
+    instance.addEventListener('pressup', stopRotation);
+
+    instance.dispatcher = e;
+}
+
+
+
+// インスタンスを回してからクリックした座標に合わせる場合
+function rotate(e) {
+    var instance   = e.target;
+    var mouseX     = e.stageX;
+    var mouseY     = e.stageY;
+
+    instance.rotation += angle;  // 順番に注意
     instance.x = mouseX;
     instance.y = mouseY;
 
     stage.update();
 }
 
+function stopRotation(e) {
+    var instance = e.target;
+    instance.removeEventListener('pressmove', rotate);
+    instance.removeEventListener('pressup', rotate);
+
+    // instance.removeEventListener("pressmove", drag);
+    // instance.removeEventListener("pressup", drag);
+}

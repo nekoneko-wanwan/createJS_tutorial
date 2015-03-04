@@ -3,12 +3,9 @@ var connect = require("gulp-connect");
 var path = require("path");
 
 var paths = [
-  "./root/createjs/sample/**/*.css",
-  "./root/createjs/sample/**/*.html",
-  "./root/createjs/sample/**/*.js",
-  "./root/createjs/book/**/*.css",
-  "./root/createjs/book/**/*.html",
-  "./root/createjs/book/**/*.js"
+  "./root/createjs/**/*.css",
+  "./root/createjs/**/*.html",
+  "./root/createjs/**/*.js"
 ];
 
 

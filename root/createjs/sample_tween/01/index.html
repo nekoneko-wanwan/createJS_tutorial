@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="js">
+<head>
+<meta charset="utf-8">
+<title>TweenJS: Simple Tween Only Demo</title>
+<style>
+.content {
+  position: relative;
+}
+
+.ball {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 25px;
+  border: 1px solid #000;
+}
+</style>
+
+<!-- library load -->
+<script src="../../_assets/libs/preloadjs-NEXT.min.js"></script>
+<script src="../../lib/easeljs-NEXT.combined.js"></script>
+<script src="../../lib/tweenjs-NEXT.combined.js"></script>
+
+<!-- CSSPluginを使用することでHTML要素に対して設定することもできる -->
+<script src="../src/CSSPlugin.js"></script>
+<script src="main.js"></script>
+</head>
+
+<body onload="init();">
+<!-- canvasは使用していない -->
+<!-- 単なるDOM操作なのでjQueryアニメーションと対して変わらないし、動作も重い -->
+
+<div id="testCanvas" class="content"></div>
+
+<!-- <div class="wrapper">
+	<canvas id="testCanvas" width="960" height="400"></canvas>
+</div>
+ -->
+
+
+</body>
+</html>
